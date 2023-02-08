@@ -10,3 +10,5 @@ export { default as Notification } from "./Admin/Notification";
 export { default as Module } from "./Module";
 export { default as Track } from "./Admin/Track";
 export { default as SingleGroup } from "./Admin/SingleGroup";
+export { default as Mentors } from "./Mentors";
+export { default as Mentees } from "./Mentees";

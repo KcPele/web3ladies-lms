@@ -9,14 +9,20 @@ import { RxDragHandleDots2 } from "react-icons/rx";
 import { HiOutlineLogout } from "react-icons/hi";
 import { useState } from "react";
 import { logo } from "../assets";
-import { IoMdArrowDropdown, IoMdNotificationsOutline } from "react-icons/io";
+import {
+  IoMdArrowDropdown,
+  IoMdNotificationsOutline,
+  IoMdArrowDropup,
+} from "react-icons/io";
 import { GiSpiderWeb } from "react-icons/gi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { BsDot } from "react-icons/bs";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppStateContent } from "../context/AppStateContext";
 import NavigateButton from "./sidebar/NavigateButton";
 
 const Sidebar = () => {
   const { active, setActive, isAdmin } = useAppStateContent();
+  const [userModal, setUserModal] = useState(false);
   const navigate = useNavigate();
   let location = useLocation();
 
@@ -41,21 +47,37 @@ const Sidebar = () => {
             />
             <li
               className={`flex items-center rounded cursor-pointer py-[17px] px-4 ${
-                location.pathname === "/users"
+                active === "Users"
                   ? "bg-[#F8F2FF] text-[#7D0BFE]"
                   : "text-[#858585]"
               }`}
-              // onClick={() => {
-              //   setActive("Classroom");
-              //   navigate("/classroom");
-              // }}
+              onClick={() => {
+                setActive("Users");
+                setUserModal(!userModal);
+
+                // navigate("/classroom");
+              }}
             >
-              <BiUser size={24} className="mr-2" />{" "}
+              <BiUser size={24} className="mr-2" />
+
               <span className="hidden lg:block">Users</span>
               <button className="ml-auto">
-                <IoMdArrowDropdown />
+                {userModal ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
               </button>
             </li>
+            {userModal && (
+              <li className="flex flex-col items-center rounded cursor-pointer py-[12px]">
+                <Link to="/mentees" className={`flex py-2 items-center`}>
+                  <BsDot size={20} />
+                  Mentees
+                </Link>
+                <Link to="/mentors" className="flex">
+                  <BsDot />
+                  Mentors
+                </Link>
+              </li>
+            )}
+
             <NavigateButton
               url="/tracks"
               text="Tracks"

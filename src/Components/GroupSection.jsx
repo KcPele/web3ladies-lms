@@ -167,9 +167,7 @@ const GroupSection = () => {
               <td className=" group relative px-2 md:px-8 py-[20px] text-right flex justify-end">
                 <BsThreeDots size={24} className="" />
                 <div className="absolute hidden group-hover:flex w-[146px] rounded right-10 bottom-10 px-4 drop-shadow py-[25px] bg-white  flex-col items-start gap-2">
-                  <button onClick={onOpen} className="text-[#858585]">
-                    Change role
-                  </button>
+                  <button className="text-[#858585]">Change role</button>
                   <button className="text-[#FF2F2F]">Delete member</button>
                 </div>
               </td>
