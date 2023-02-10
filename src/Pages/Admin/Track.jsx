@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PageHoc } from "../../Components";
 import CreateTask from "../../Components/Tracks/CreateTask";
 import { tracksList } from "../../Data"
@@ -24,13 +24,13 @@ const Track = () => {
       className="flex flex-wrap gap-7"
     >
       {tracksList?.map((track) => (
-        <Link key={track.id} to={`/tracks/${track.id}`}>
+        <div key={track.id} >
         <div
         className="relative  rounded-2xl overflow-hidden w-full mobile:w-[302px] p-4 bg-white"
         >
-          <div className="relative">
+          <Link to={`/tracks/${track.id}`} className="relative">
             <img src={track.trackImage} className="rounded-lg object-contain" alt="" />
-          </div>
+          </Link>
           <p className="font-semibold text-[18px] mt-3 ">{track.track}</p>
           <div className=" w-fit ml-auto">
             <Menu bg="primary">
@@ -55,7 +55,7 @@ const Track = () => {
             </Menu>
           </div>
         </div>
-          </Link>
+          </div>
       ))}
       <div onClick={onOpen} className="cursor-pointer flex rounded-2xl overflow-hidden w-full mobile:w-[302px] p-4 bg-white">
         <div className=" m-auto ">

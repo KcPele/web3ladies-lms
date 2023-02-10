@@ -15,7 +15,7 @@ const SettingsTab = () => {
   return (
     <>
       <Tabs className="w-full">
-        <TabList border="2px solid bgLight">
+               <TabList border="2px solid bgLight" className="overflow-x-auto overflow-y-hidden h-fit" >
           <Tab px={{base:"2px", md:"4", lg:"6"}}  _selected={{ color: '#7D0BFE', borderBottom:"2px solid #7D0BFE" }}>
           Account
             </Tab>

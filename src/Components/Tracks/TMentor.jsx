@@ -12,7 +12,6 @@ import TrackPaignation from "./TrackPagination";
 import {  mentorList } from "../../Data";
 
 const TMentor = () => {
-  // const [mentorList, setMentorList] = useState([mentorList]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);

@@ -1,4 +1,4 @@
-import { tracksImage } from "../assets";
+import { tracksImage, pdf, txt } from "../assets";
 
 export const tracksList = [
   {
@@ -187,5 +187,68 @@ export const menteeList = [
     status: "safe",
     track: "Product Design"
 
+  },
+];
+
+export const assignmentData = [
+  {
+    id: 1,
+    trackImage: tracksImage,
+    title: "Write a detailed PRD for the product you reseached in the last assignment",
+    number: "12",
+    status: "PUBLISHED",
+  },
+  {
+    id: 2,
+    trackImage: tracksImage,
+    title: "Write a detailed PRD for the product you reseached in the last assignment",
+    number: "12",
+    status: "DRAFT",
+  },
+  {
+    id: 3,
+    trackImage: tracksImage,
+    title: "Write a detailed PRD for the product you reseached in the last assignment",
+    number: "12",
+    status: "DRAFT",
+  },
+];
+
+export const assignmentList = [
+  {
+    id: 1,
+    image: pdf,
+    name: "Write a detailed PRD for the product you reseached in the last assignment",
+    time: "12 hours ago",
+  },
+  {
+    id: 2,
+    image: txt,
+    name: "Write a detailed PRD for the product you reseached in the last assignment",
+    time: "12 hours ago",
+  },
+  {
+    id: 3,
+    image: pdf,
+    name: "Write a detailed PRD for the product you reseached in the last assignment",
+    time: "12 hours ago",
+  },
+];
+
+export const modulesData = [
+  {
+    id: 1,
+    title: "Module One",
+    theme: "Module theme",
+  },
+  {
+    id: 2,
+    title: "Module Two",
+    theme: "Module theme",
+  },
+  {
+    id: 3,
+    title: "Module Three",
+    theme: "Module theme",
   },
 ];
