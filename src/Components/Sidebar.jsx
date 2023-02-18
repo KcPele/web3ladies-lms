@@ -47,6 +47,37 @@ const Sidebar = () => {
             />
             <li
               className={`flex items-center rounded cursor-pointer py-[17px] px-4 ${
+                location.pathname === "/classroom"
+                  ? "bg-[#F8F2FF] text-[#7D0BFE]"
+                  : "text-[#858585]"
+              }`}
+              onClick={() => {
+                setActive("Classroom");
+                setUserModal(!userModal);
+                // navigate("/classroom");
+              }}
+            >
+              <BsPlayBtn size={24} className="mr-2" />
+
+              <span className="hidden lg:block">Classroom</span>
+              <button className="ml-auto">
+                {userModal ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+              </button>
+            </li>
+            {userModal && (
+              <li className="flex flex-col items-center rounded cursor-pointer py-[12px]">
+                <Link to="/classroom" className={`flex py-2 items-center`}>
+                  <BsDot size={20} />
+                  Week1
+                </Link>
+                <Link to="/mentors" className="flex">
+                  <BsDot />
+                  Week2
+                </Link>
+              </li>
+            )}
+            <li
+              className={`flex items-center rounded cursor-pointer py-[17px] px-4 ${
                 active === "Users"
                   ? "bg-[#F8F2FF] text-[#7D0BFE]"
                   : "text-[#858585]"
@@ -77,6 +108,7 @@ const Sidebar = () => {
                 </Link>
               </li>
             )}
+            
 
             <NavigateButton
               url="/tracks"
@@ -123,23 +155,8 @@ const Sidebar = () => {
               icon={<BsStar size={24} className="mr-2" />}
             />
 
-            <li
-              className={` mb-4 flex items-center rounded cursor-pointer py-[17px] px-4 ${
-                location.pathname === "/classroom"
-                  ? "bg-[#F8F2FF] text-[#7D0BFE]"
-                  : "text-[#858585]"
-              }`}
-              // onClick={() => {
-              //   setActive("Classroom");
-              //   navigate("/classroom");
-              // }}
-            >
-              <BsPlayBtn size={24} className="mr-2" />{" "}
-              <span className="hidden lg:block">Classroom</span>
-              <button className="ml-auto">
-                <IoMdArrowDropdown />
-              </button>
-            </li>
+            
+            
           </ul>
         )}
 
