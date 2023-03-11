@@ -3,10 +3,8 @@ import {
   Announcements,
   AssignmentCard,
   MenteesTable,
-  Navbar,
   PageHoc,
   RecentRecording,
-  Sidebar,
   TotalPointCard,
   TracksCard,
 } from "../Components";
@@ -14,7 +12,10 @@ import { IoMdClose } from "react-icons/io";
 import { tracksImage } from "../assets";
 import { useAppStateContent } from "../context/AppStateContext";
 import { BsPlusLg } from "react-icons/bs";
+
 import { menteesData } from "../Data";
+import OnboardModal from "../Components/OnboardNav/OnboardModal";
+import OnboardNav from "../Components/OnboardNav/OnboardNav";
 const tracksData = [
   {
     id: 1,
@@ -92,12 +93,25 @@ const assignmentData = [
     hasSubmitted: true,
   },
 ];
+
 const Dashboard = () => {
   const [active, setActive] = useState("all");
   const { isAdmin, isMentor } = useAppStateContent();
+  const [isNav, setIsNav] = useState(false)
   const [assignment, setAssignment] = useState(assignmentData);
+  const [showModal, setShowModal] = useState(false);
+
+
   return (
-    <div className="w-full  ">
+    <div className="w-full ">
+      {!isNav ? 
+      <OnboardModal setIsNav={setIsNav} setShowModal={setShowModal}/>
+      :
+      <div className="fixed overflow-hidden ">
+        <OnboardNav showModal={showModal} setShowModal={setShowModal} />
+      </div>
+      }
+
       <h1 className="text-2xl mb-6 font-bold">Dashboard</h1>
       {!isAdmin && (
         <div className=" w-full text-white bg-[#1A1A1A] px-[26px] py-2 sm:py-5 rounded-[8px] flex flex-col md:flex-row justify-between gap-2 md:items-center">
@@ -123,7 +137,7 @@ const Dashboard = () => {
       </div>
       <div className="mt-12 flex w-fill gap-[27px]">
         <div className="w-full">
-          {isMentor ? (
+          {isMentor && !isAdmin ? (
             <div className="w-full">
               <h3 className="font-bold text-5">Mentees</h3>
               <MenteesTable menteesTableData={menteesData.splice(0, 9)} />

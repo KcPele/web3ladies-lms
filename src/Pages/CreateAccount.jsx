@@ -25,6 +25,7 @@ const Registration = () => {
       return <RegSuccess />;
     }
   };
+
   return (
     <>
       <div className="mt-7 w-[90%] ">{FormDisplay()}</div>
@@ -42,7 +43,7 @@ const Registration = () => {
         ) : page === 1 ? (
           <button
             onClick={() => {
-              console.log(regFormData);
+              // console.log(regFormData);
               setPage((currentPage) => currentPage + 1);
             }}
             className="w-[82%] flex gap-3 items-center justify-center text-[16px] my-3 rounded-lg text-white p-2 bg-primary"

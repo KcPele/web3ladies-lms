@@ -14,9 +14,9 @@ const Announcements = () => {
         )}
 
         <Link to="">
-          <div class="flex flex-col items-center justify-center">
-            <p class="text-sm text-gray-700 ">See all</p>
-            <div class="w-12 h-[3px] bg-gray-300 "></div>
+          <div   className="flex flex-col items-center justify-center">
+            <p   className="text-sm text-gray-700 ">See all</p>
+            <div   className="w-12 h-[3px] bg-gray-300 "></div>
           </div>
         </Link>
       </div>

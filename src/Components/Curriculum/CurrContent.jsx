@@ -15,12 +15,12 @@ const CurrContent = () => {
         gravida lectus.
       </p>
 
-      <ol class="list-decimal">
+      <ol   className="list-decimal">
         <li className=" text-[16px] mt-6 font-[600]">
         What is a Crypto Wallet?
         </li>
       </ol>
-      <ul class="list-disc">
+      <ul   className="list-disc">
         <li className="text-[16px] mt-2 mx-8 font-[500]"> Explanation Wallet</li>
       </ul>
       <RingBtn text="Go to resources" link="resourcecontent"/>

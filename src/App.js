@@ -87,3 +87,37 @@ const App = () => {
 };
 
 export default App;
+
+
+// <TableContainer>
+// <Table variant="simple">
+//   <Thead>
+//     <Tr color="grey">
+//       {grades.header.map((item) => (
+//         <Th key={item.id}>{item.type}</Th>
+//       ))}
+//     </Tr>
+//   </Thead>
+//   <Tbody w="600px">
+//     {grades.list.map((item) => (
+//       <Tr key={item.id}>
+//         <Td bg="primary">{item.item}</Td>
+//         <Td color="grey">
+//           <span
+//             className={`m-auto w-fit px-3 py-2 rounded-md  ${
+//               item.status === "Completed"
+//                 ? "text-primary bg-[#F2E7FF]"
+//                 : "text-[#FF5F2D] bg-[#F2E7FF]"
+//             }`}
+//           >
+//             {item.status}
+//           </span>
+//         </Td>
+//         <Td>{item.due}</Td>
+//         <Td color="grey">{item.weight}</Td>
+//         <Td>{item.grade}</Td>
+//       </Tr>
+//     ))}
+//   </Tbody>
+// </Table>
+// </TableContainer>
