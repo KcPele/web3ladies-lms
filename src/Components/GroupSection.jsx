@@ -4,14 +4,11 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  Select,
   ModalFooter,
   Button,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Stack,
   Input,
 } from "@chakra-ui/react";
 import { useState } from "react";

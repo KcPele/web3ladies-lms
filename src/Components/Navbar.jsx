@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUserCircle, FaCaretDown } from "react-icons/fa";
+import { FaCaretDown } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiSettings2Line } from "react-icons/ri"
 import { useState } from "react";
