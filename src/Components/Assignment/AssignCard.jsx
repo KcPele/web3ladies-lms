@@ -1,5 +1,5 @@
 import React from 'react'
-import { BsThreeDotsVertical, BsPlusLg } from "react-icons/bs"
+import { BsThreeDotsVertical } from "react-icons/bs"
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 

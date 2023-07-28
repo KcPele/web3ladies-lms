@@ -16,6 +16,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { menteesData } from "../Data";
 import OnboardModal from "../Components/OnboardNav/OnboardModal";
 import OnboardNav from "../Components/OnboardNav/OnboardNav";
+import AssignDash from "../Components/AssignDash";
 const tracksData = [
   {
     id: 1,
@@ -231,16 +232,17 @@ const Dashboard = () => {
                   Completed
                 </button>
               </div>
-              <div className="flex w-full gap-[1px] flex-col">
+              {/* <div className="flex w-full gap-[1px] flex-col">
                 {assignment.map((val) => (
                   <AssignmentCard
-                    title={val.title}
-                    status={val.status}
-                    url={val.url}
-                    hasSubmitted={val.hasSubmitted}
+                  title={val.title}
+                  status={val.status}
+                  url={val.url}
+                  hasSubmitted={val.hasSubmitted}
                   />
-                ))}
-              </div>
+                  ))}
+              </div> */}
+              <AssignDash assignment={assignment}/>
             </div>
           )}
         </div>

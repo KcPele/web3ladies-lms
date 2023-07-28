@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "antd/dist/reset.css";
+// import 'antd/dist/antd.min.css'  
+// import 'antd/dist/antd.css';
+// import 'antd/dist/reset.css';
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -23,3 +25,27 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+
+
+// module.exports = {
+//   module: {
+//     rules: [
+//       {
+//         test: /\.css$/,
+//         use: [
+//           'style-loader',
+//           'css-loader',
+//           {
+//             loader: 'postcss-loader',
+//             options: {
+//               plugins: [
+//                 require('autoprefixer')
+//               ]
+//             }
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// };

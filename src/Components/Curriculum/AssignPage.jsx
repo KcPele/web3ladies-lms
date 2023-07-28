@@ -1,9 +1,7 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import { PageHoc } from "../../Components";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import Instruction from '../../Components/Assignment/Instruction';
-import Submission from '../../Components/Assignment/Submission';
 import { AssignInstruc } from './AssignInstruc';
 import { AssignSubm } from './AssignSubm';
 

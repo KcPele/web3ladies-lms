@@ -3,7 +3,7 @@ import BtnIcon from '../Common/Button/BtnIcon'
 import PupleBtn from '../Common/Button/PupleBtn'
 import Input from "../Common/Input/Input";
 import PasswordInput from "../Common/Input/PasswordInput";
-import { Flex, Box, Text, Checkbox } from "@chakra-ui/react"
+import { Flex, Checkbox } from "@chakra-ui/react"
 
 import Google from '../Assests/Google.svg'
 import { Link } from 'react-router-dom';
