@@ -17,7 +17,7 @@ const NavigateButton = ({ url, icon, text }) => {
       }}
     >
       {icon}
-      <span className="hidden lg:block"> {text}</span>
+      <span className="block"> {text}</span>
     </li>
   );
 };

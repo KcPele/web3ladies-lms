@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useRef } from "react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  useDisclosure,
+  DrawerCloseButton,
+  Input,
+  Button
+} from '@chakra-ui/react'
 import { FaCaretDown } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiSettings2Line } from "react-icons/ri"
 import { useState } from "react";
 import { profileimage } from "../assets";
 import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { logo } from "../assets";
+import { RxHamburgerMenu } from 'react-icons/rx'
+
+
 const Navbar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
+
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([
@@ -15,8 +35,33 @@ const Navbar = () => {
   ]);
 
   return (
-    <nav className="bg-white py-10 border-b-[1px] border-[rgba(0, 0, 0, 0.2)] px-10 flex gap-6 items-center justify-end h-16">
-      <div className="relative cursor-pointer w-5">
+    <nav className="bg-white py-2 lg:py-10 border-b-[1px] border-[rgba(0, 0, 0, 0.2)] px-2 lg:px-10 flex gap-6 items-center justify-between lg:justify-end h-16">
+      <>
+      <div className="lg:hidden flex gap-2 items-center">
+        <RxHamburgerMenu ref={btnRef} className="w-8 h-8" onClick={onOpen}/>
+        <div className="w-[5rem]">
+          <img src={logo} className="" alt="Logo" />
+        </div>
+
+      </div>
+      <Drawer
+        isOpen={isOpen}
+        placement='left'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <br />
+          <DrawerBody>
+            <Sidebar />
+          </DrawerBody>
+
+        </DrawerContent>
+      </Drawer>
+    </>
+      <div className="relative ml-auto lg:ml-0 cursor-pointer w-5 ">
         <IoMdNotificationsOutline
           size={24}
           className=" text-lg mr-4 text-gray-800"
@@ -56,19 +101,19 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      <div>
+      <div className="hidden lg:block">
         <button className="text-[#3EB876] rounded border-[1px] border-[#afdbc5] px-5 py-[10px] bg-[#ECF8F2] ">
           Safe
         </button>
       </div>
-      <div className=" flex gap-5 items-center">
+      <div className=" flex gap-0 lg:gap-5 items-center">
         <div className="flex items-center gap-3">
           <img
             className="w-10 h-10  object-contain rounded-full"
             src={profileimage}
             alt="profile"
           />
-          <div className="flex flex-col">
+          <div className="hidden lg:flex flex-col">
             <span className="font-bold">Oluchi Enebeli</span>
 
             <span className="text-xs text-[#767278]">Mentee</span>

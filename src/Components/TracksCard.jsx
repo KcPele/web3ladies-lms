@@ -18,13 +18,13 @@ const TracksCard = ({
       onClick={() => {
         navigate("/cohort/34");
       }}
-      className="relative cursor-pointer rounded-2xl overflow-hidden w-[302px] p-4 bg-white"
+      className="relative cursor-pointer rounded-2xl overflow-hidden w-full tablet:w-[302px] p-4 bg-white"
     >
       {!isAdmin && status === "Evited" && (
         <div className="bg-[#FFFFFF] z-50 absolute inset-0 opacity-50"></div>
       )}
       <div className="relative">
-        <img src={trackImage} className="rounded-lg object-contain" alt="" />
+        <img src={trackImage} className="rounded-lg object-contain w-full" alt="" />
         <div className="px-[13px] py-[4px] absolute rounded-[23px] right-3 top-3 bg-[#FAFAFACC]">
           <p className="text-[#7D0BFE] text[11px] font-bold">COHORT {cohort}</p>
         </div>

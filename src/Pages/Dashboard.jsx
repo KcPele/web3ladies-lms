@@ -17,6 +17,7 @@ import { menteesData } from "../Data";
 import OnboardModal from "../Components/OnboardNav/OnboardModal";
 import OnboardNav from "../Components/OnboardNav/OnboardNav";
 import AssignDash from "../Components/AssignDash";
+
 const tracksData = [
   {
     id: 1,
@@ -105,6 +106,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full ">
+     
       {!isNav ? 
       <OnboardModal setIsNav={setIsNav} setShowModal={setShowModal}/>
       :
@@ -232,7 +234,7 @@ const Dashboard = () => {
                   Completed
                 </button>
               </div>
-              {/* <div className="flex w-full gap-[1px] flex-col">
+              <div className="flex w-full gap-[1px] flex-col">
                 {assignment.map((val) => (
                   <AssignmentCard
                   title={val.title}
@@ -241,8 +243,8 @@ const Dashboard = () => {
                   hasSubmitted={val.hasSubmitted}
                   />
                   ))}
-              </div> */}
-              <AssignDash assignment={assignment}/>
+              </div>
+              {/* <AssignDash assignment={assignment}/> */}
             </div>
           )}
         </div>
