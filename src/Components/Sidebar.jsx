@@ -27,11 +27,11 @@ const Sidebar = () => {
   let location = useLocation();
 
   return (
-    <aside className=" px-4 border-r-[1px] bg-white min-h-screen border-[rgba(0, 0, 0, 0.2)] p-2">
-      <div className="text-[#858585] mb-16 text-center py-2">
+    <aside className="fixed w-0 lg:w-[11.5em] px-0 lg:px-4 border-0 lg:border-r-[1px] min-h-screen border-[rgba(0, 0, 0, 0.2)] p-2">    
+      <div className="hidden lg:block text-[#858585] mb-10 text-center py-2">
         <img src={logo} alt="Logo" />
       </div>
-      <nav>
+      <nav className="">
         {isAdmin || isMentor ? (
           <ul>
             <NavigateButton
@@ -70,7 +70,7 @@ const Sidebar = () => {
                 >
                   <BiUser size={24} className="mr-2" />
 
-                  <span className="hidden lg:block">Users</span>
+                  <span className="block">Users</span>
                   <button className="ml-auto">
                     {userModal ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                   </button>
@@ -159,7 +159,7 @@ const Sidebar = () => {
               // }}
             >
               <BsPlayBtn size={24} className="mr-2" />{" "}
-              <span className="hidden lg:block">Classroom</span>
+              <span className="block">Classroom</span>
               <button className="ml-auto">
                 <IoMdArrowDropdown />
               </button>
@@ -173,14 +173,14 @@ const Sidebar = () => {
             onClick={() => {}}
           >
             <BsSlack size={24} className="mr-2" />{" "}
-            <span className="hidden lg:block">Go to slack</span>
+            <span className="block">Go to slack</span>
           </li>
           <li
             className={`text-[#858585] flex items-center rounded cursor-pointer py-[17px] px-4 `}
             onClick={() => {}}
           >
             <HiOutlineLogout size={24} className="mr-2" />{" "}
-            <span className="hidden lg:block">Logout</span>
+            <span className="block">Logout</span>
           </li>
         </ul>
       </nav>
