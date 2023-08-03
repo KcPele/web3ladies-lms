@@ -1,11 +1,28 @@
 import axios from "axios";
-import { useMutation, queryCache } from "react-query";
+import { useMutation } from "react-query";
+import { queryClient } from "./utils";
 
-export default function useCreatePost(queryKey, url) {
+let defaultUrl = "https://web3ladies-backend.herokuapp.com";
+export default function useCreate(
+  queryKey,
+  url,
+  { contentType = "application/json", callBack = () => {} }
+) {
   return useMutation(
-    (values) => axios.post(url, values).then((res) => res.data),
+    (values) =>
+      axios
+        .post(`${defaultUrl}${url}`, values, {
+          headers: {
+            "Content-Type": contentType,
+          },
+        })
+        .then((res) => res.data),
     {
-      onSuccess: () => queryCache.refetchQueries(queryKey),
+      onSuccess: () => {
+        queryClient.refetchQueries(queryKey);
+        //if you want an action to be performed
+        callBack();
+      },
     }
   );
 }

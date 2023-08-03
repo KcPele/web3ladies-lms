@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BtnIcon from "../Common/Button/BtnIcon";
 import PupleBtn from "../Common/Button/PupleBtn";
 import Input from "../Common/Input/Input";
@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Google from "../Assests/Google.svg";
 import { Link } from "react-router-dom";
+import useCreate from "../hooks/useCreate";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Email is required"),
@@ -18,9 +19,21 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const handleClick = () => setShow(!show);
 
+  const {
+    mutate: getUserToken,
+    isLoading,
+    data,
+    isError,
+    error,
+  } = useCreate("user", "/auth/login", {
+    callBack: handleCallBack,
+  });
+  function handleCallBack() {
+    console.log("token");
+  }
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,11 +42,17 @@ const Login = () => {
 
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log(values);
+      getUserToken(values);
+
       // setLoading(true);
       // login(values.email, values.password);
     },
   });
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div>
       <p className="text-[28px] mb-8 leading-9 font-[700]">
@@ -86,7 +105,7 @@ const Login = () => {
             </div>
           </div>
           <div className="w-full">
-            {!loading ? (
+            {!isLoading ? (
               <button className="text-[16px] my-3 rounded-md py-3 text-white w-full bg-primary">
                 Login
               </button>
@@ -104,6 +123,11 @@ const Login = () => {
               </Button>
             )}
           </div>
+          {isError && (
+            <div className=" text-[red] text-[14px] italic">
+              {error?.response?.data?.message}
+            </div>
+          )}
           <div className="flex">
             <Link
               className="underline hover:underline hover:text-black mx-auto text-primary text-center"

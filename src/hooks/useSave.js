@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useMutation, queryCache } from "react-query";
+import { useMutation } from "react-query";
+import { queryClient } from "./utils";
 
 // export default function useSave(queryKey, url) {
 //   return useMutation(
@@ -7,20 +8,20 @@ import { useMutation, queryCache } from "react-query";
 //       axios.patch(`${url}/${values.id}`, values).then((res) => res.data),
 //     {
 //       onMutate: (values) => {
-//         const previousPost = queryCache.getQueryData([queryKey, values.id]);
+//         const previousPost = queryClient.getQueryData([queryKey, values.id]);
 
-//         queryCache.setQueryData([queryKey, values.id], (old) => ({
+//         queryClient.setQueryData([queryKey, values.id], (old) => ({
 //           ...old,
 //           ...values,
 //         }));
 
 //         return () =>
-//           queryCache.setQueryData([queryKey, values.id], previousPost);
+//           queryClient.setQueryData([queryKey, values.id], previousPost);
 //       },
 //       onError: (error, values, rollback) => rollback(),
 //       onSuccess: async (values) => {
-//         queryCache.refetchQueries("posts");
-//         await queryCache.refetchQueries([queryKey, values.id]);
+//         queryClient.refetchQueries("posts");
+//         await queryClient.refetchQueries([queryKey, values.id]);
 //       },
 //     }
 //   );
@@ -32,18 +33,18 @@ export default function useSave(queryKey, url) {
       axios.patch(`${url}/${values.id}`, values).then((res) => res.data),
     {
       onMutate: (values) => {
-        queryCache.cancelQueries(queryKey);
+        queryClient.cancelQueries(queryKey);
 
-        const oldPost = queryCache.getQueryData([queryKey, values.id]);
+        const oldPost = queryClient.getQueryData([queryKey, values.id]);
 
-        queryCache.setQueryData([queryKey, values.id], values);
+        queryClient.setQueryData([queryKey, values.id], values);
 
-        return () => queryCache.setQueryData([queryKey, values.id], oldPost);
+        return () => queryClient.setQueryData([queryKey, values.id], oldPost);
       },
       onError: (error, values, rollback) => rollback(),
       onSuccess: (data, variables) => {
-        queryCache.invalidateQueries(queryKey);
-        queryCache.invalidateQueries([queryKey, variables.id]);
+        queryClient.invalidateQueries(queryKey);
+        queryClient.invalidateQueries([queryKey, variables.id]);
       },
     }
   );

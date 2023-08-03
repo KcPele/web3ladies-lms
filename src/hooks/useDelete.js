@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useMutation, queryCache } from "react-query";
+import { useMutation } from "react-query";
+import { queryClient } from "./utils";
 
 export default function useDeletePost(queryKey, url) {
   return useMutation(
     (id) => axios.delete(`${url}/${id}`).then((res) => res.data),
     {
-      onSuccess: () => queryCache.refetchQueries(queryKey),
+      onSuccess: () => queryClient.refetchQueries(queryKey),
     }
   );
 }
