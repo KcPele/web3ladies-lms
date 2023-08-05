@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BtnIcon from "../Common/Button/BtnIcon";
-import PupleBtn from "../Common/Button/PupleBtn";
-import Input from "../Common/Input/Input";
-import PasswordInput from "../Common/Input/PasswordInput";
 import { Flex, Checkbox } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
@@ -11,6 +8,7 @@ import * as Yup from "yup";
 import Google from "../Assests/Google.svg";
 import { Link } from "react-router-dom";
 import useCreate from "../hooks/useCreate";
+import { useAppStateContent } from "../context/AppStateContext";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required("Email is required"),
@@ -21,6 +19,7 @@ const Login = () => {
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
+  const { handleToken } = useAppStateContent();
 
   const {
     mutate: getUserToken,
@@ -32,7 +31,7 @@ const Login = () => {
     callBack: handleCallBack,
   });
   function handleCallBack() {
-    console.log("token");
+    console.log("token fetched");
   }
   const formik = useFormik({
     initialValues: {
@@ -50,8 +49,10 @@ const Login = () => {
   });
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    if (data) {
+      handleToken(data.token);
+    }
+  }, [data, isLoading, handleToken]);
 
   return (
     <div>
