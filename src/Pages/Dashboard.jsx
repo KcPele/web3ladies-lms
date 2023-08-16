@@ -12,7 +12,7 @@ import { IoMdClose } from "react-icons/io";
 import { tracksImage } from "../assets";
 import { useAppStateContent } from "../context/AppStateContext";
 import { BsPlusLg } from "react-icons/bs";
-
+import { useInfiniteQuery } from "react-query";
 import { menteesData } from "../Data";
 import OnboardModal from "../Components/OnboardNav/OnboardModal";
 import OnboardNav from "../Components/OnboardNav/OnboardNav";
@@ -99,21 +99,24 @@ const assignmentData = [
 const Dashboard = () => {
   const [active, setActive] = useState("all");
   const { isAdmin, isMentor } = useAppStateContent();
-  const [isNav, setIsNav] = useState(false)
+  const [isNav, setIsNav] = useState(false);
   const [assignment, setAssignment] = useState(assignmentData);
   const [showModal, setShowModal] = useState(false);
 
+  const fetchtTracks = ({}) =>
+    axiso.get(appUrl + "/tracts?", {
+      head,
+    });
 
   return (
     <div className="w-full ">
-     
-      {!isNav ? 
-      <OnboardModal setIsNav={setIsNav} setShowModal={setShowModal}/>
-      :
-      <div className="fixed overflow-hidden ">
-        <OnboardNav showModal={showModal} setShowModal={setShowModal} />
-      </div>
-      }
+      {!isNav ? (
+        <OnboardModal setIsNav={setIsNav} setShowModal={setShowModal} />
+      ) : (
+        <div className="fixed overflow-hidden ">
+          <OnboardNav showModal={showModal} setShowModal={setShowModal} />
+        </div>
+      )}
 
       <h1 className="text-2xl mb-6 font-bold">Dashboard</h1>
       {!isAdmin && (
@@ -147,7 +150,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <div className="">
-              <h3 className="font-bold text-5">My Track</h3>
+              <h3 className="font-bold text-5">Tracks</h3>
               <div className="flex gap-5 flex-wrap">
                 {tracksData.map((val) => (
                   <TracksCard
@@ -158,7 +161,7 @@ const Dashboard = () => {
                     status={val.status}
                   />
                 ))}
-                {!isAdmin && !isMentor && (
+                {isAdmin && !isMentor && (
                   <div className="w-[302px] cursor-pointer gap-[21px] bg-white h-[314px] flex justify-center items-center flex-col ">
                     <div className="rounded-full w-16 h-16 bg-[#FBF5FE]   flex justify-center items-center flex-col">
                       <BsPlusLg size={30} className="   text-[#7D0BFE] " />
@@ -237,12 +240,12 @@ const Dashboard = () => {
               <div className="flex w-full gap-[1px] flex-col">
                 {assignment.map((val) => (
                   <AssignmentCard
-                  title={val.title}
-                  status={val.status}
-                  url={val.url}
-                  hasSubmitted={val.hasSubmitted}
+                    title={val.title}
+                    status={val.status}
+                    url={val.url}
+                    hasSubmitted={val.hasSubmitted}
                   />
-                  ))}
+                ))}
               </div>
               {/* <AssignDash assignment={assignment}/> */}
             </div>

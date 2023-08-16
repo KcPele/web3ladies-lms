@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 export const AppContext = createContext();
 
+export const appUrl = "https://web3ladies-backend.herokuapp.com";
 const AppStateContext = ({ children }) => {
   const [active, setActive] = useState("Dashboard");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -29,7 +30,7 @@ const AppStateContext = ({ children }) => {
     //check if token is expired
     if (decodedToken.exp * 1000 < Date.now()) {
       console.log("token is expired");
-      // navigate("/login");
+      navigate("/login");
       localStorage.removeItem("tokenUser");
       setToken(null);
     } else {
