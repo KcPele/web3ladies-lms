@@ -37,13 +37,13 @@ const AppStateContext = ({ children }) => {
       setUserData(decodedToken);
 
       console.log(decodedToken);
-      setIsAdmin(true);
+
       navigate("/dashboard");
-      // if (decoded.role === "admin") {
-      //   setIsAdmin(true);
-      // } else if (decoded.role === "mentor") {
-      //   setIsMentor(true);
-      // }
+      if (decoded.role === "teamMember") {
+        setIsAdmin(true);
+      } else if (decoded.role === "mentor") {
+        setIsMentor(true);
+      }
     }
   };
 
