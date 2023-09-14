@@ -39,9 +39,9 @@ const AppStateContext = ({ children }) => {
       console.log(decodedToken);
 
       navigate("/dashboard");
-      if (decoded.role === "teamMember") {
+      if (decodedToken.role === "teamMember") {
         setIsAdmin(true);
-      } else if (decoded.role === "mentor") {
+      } else if (decodedToken.role === "mentor") {
         setIsMentor(true);
       }
     }

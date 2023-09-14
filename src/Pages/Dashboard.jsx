@@ -17,6 +17,7 @@ import { menteesData } from "../Data";
 import OnboardModal from "../Components/OnboardNav/OnboardModal";
 import OnboardNav from "../Components/OnboardNav/OnboardNav";
 import AssignDash from "../Components/AssignDash";
+import axios from "axios";
 
 const tracksData = [
   {
@@ -103,10 +104,10 @@ const Dashboard = () => {
   const [assignment, setAssignment] = useState(assignmentData);
   const [showModal, setShowModal] = useState(false);
 
-  const fetchtTracks = ({}) =>
-    axiso.get(appUrl + "/tracts?", {
-      head,
-    });
+  // const fetchtTracks = ({}) =>
+  //   axios.get(appUrl + "/tracts?", {
+  //     head,
+  //   });
 
   return (
     <div className="w-full ">
