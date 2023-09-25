@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Announcements,
   AssignmentCard,
@@ -10,7 +10,7 @@ import {
 } from "../Components";
 import { IoMdClose } from "react-icons/io";
 import { tracksImage } from "../assets";
-import { useAppStateContent } from "../context/AppStateContext";
+import { appUrl, useAppStateContent } from "../context/AppStateContext";
 import { BsPlusLg } from "react-icons/bs";
 import { useInfiniteQuery } from "react-query";
 import { menteesData } from "../Data";
@@ -18,8 +18,8 @@ import OnboardModal from "../Components/OnboardNav/OnboardModal";
 import OnboardNav from "../Components/OnboardNav/OnboardNav";
 import AssignDash from "../Components/AssignDash";
 import axios from "axios";
-
-const tracksData = [
+import useGets from "../hooks/useGets";
+const tracksData1 = [
   {
     id: 1,
     trackImage: tracksImage,
@@ -99,16 +99,23 @@ const assignmentData = [
 
 const Dashboard = () => {
   const [active, setActive] = useState("all");
-  const { isAdmin, isMentor } = useAppStateContent();
+  const { isAdmin, isMentor, token } = useAppStateContent();
   const [isNav, setIsNav] = useState(false);
   const [assignment, setAssignment] = useState(assignmentData);
   const [showModal, setShowModal] = useState(false);
+  const [tracksData, setTracksData] = useState({});
 
-  // const fetchtTracks = ({}) =>
-  //   axios.get(appUrl + "/tracts?", {
-  //     head,
-  //   });
-
+  useEffect(() => {
+    axios
+      .get(`${appUrl}/tracks`)
+      .then((res) => {
+        console.log(res);
+        setTracksData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [token]);
   return (
     <div className="w-full ">
       {!isNav ? (
@@ -153,15 +160,22 @@ const Dashboard = () => {
             <div className="">
               <h3 className="font-bold text-5">Tracks</h3>
               <div className="flex gap-5 flex-wrap">
-                {tracksData.map((val) => (
-                  <TracksCard
-                    trackImage={val.trackImage}
-                    track={val.track}
-                    cohort={val.cohort}
-                    progress={val.progress}
-                    status={val.status}
-                  />
-                ))}
+                {tracksData?.docs && (
+                  <>
+                    {" "}
+                    {tracksData?.docs.map((track) => (
+                      <TracksCard
+                        key={track.id}
+                        id={track.id}
+                        trackImage={tracksImage}
+                        track={track.name}
+                        cohort="III"
+                        progress="60%"
+                        status={track.status}
+                      />
+                    ))}
+                  </>
+                )}
                 {isAdmin && !isMentor && (
                   <div className="w-[302px] cursor-pointer gap-[21px] bg-white h-[314px] flex justify-center items-center flex-col ">
                     <div className="rounded-full w-16 h-16 bg-[#FBF5FE]   flex justify-center items-center flex-col">

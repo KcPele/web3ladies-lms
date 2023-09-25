@@ -1,8 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export const AppContext = createContext();
-
 export const appUrl = "https://web3ladies-backend.herokuapp.com";
 const AppStateContext = ({ children }) => {
   const [active, setActive] = useState("Dashboard");
@@ -36,12 +36,12 @@ const AppStateContext = ({ children }) => {
     } else {
       setUserData(decodedToken);
 
-      console.log(decodedToken);
-
       navigate("/dashboard");
-      if (decodedToken.role === "teamMember") {
+
+      if (decodedToken.profile === "teammember") {
+        console.log(decodedToken);
         setIsAdmin(true);
-      } else if (decodedToken.role === "mentor") {
+      } else if (decodedToken.profile === "mentor") {
         setIsMentor(true);
       }
     }
@@ -50,6 +50,7 @@ const AppStateContext = ({ children }) => {
   useEffect(() => {
     if (token) {
       userTokenDecodar(token);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
   }, [token]);
   return (
