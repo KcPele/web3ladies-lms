@@ -9,22 +9,21 @@ import {
   useDisclosure,
   DrawerCloseButton,
   Input,
-  Button
-} from '@chakra-ui/react'
+  Button,
+} from "@chakra-ui/react";
 import { FaCaretDown } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { RiSettings2Line } from "react-icons/ri"
+import { RiSettings2Line } from "react-icons/ri";
 import { useState } from "react";
 import { profileimage } from "../assets";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { logo } from "../assets";
-import { RxHamburgerMenu } from 'react-icons/rx'
-
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -37,30 +36,28 @@ const Navbar = () => {
   return (
     <nav className="bg-white py-2 lg:py-10 border-b-[1px] border-[rgba(0, 0, 0, 0.2)] px-2 lg:px-10 flex gap-6 items-center justify-between lg:justify-end h-16">
       <>
-      <div className="lg:hidden flex gap-2 items-center">
-        <RxHamburgerMenu ref={btnRef} className="w-8 h-8" onClick={onOpen}/>
-        <div className="w-[5rem]">
-          <img src={logo} className="" alt="Logo" />
+        <div className="lg:hidden flex gap-2 items-center">
+          <RxHamburgerMenu ref={btnRef} className="w-8 h-8" onClick={onOpen} />
+          <div className="w-[5rem]">
+            <img src={logo} className="" alt="Logo" />
+          </div>
         </div>
-
-      </div>
-      <Drawer
-        isOpen={isOpen}
-        placement='left'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <br />
-          <DrawerBody>
-            <Sidebar />
-          </DrawerBody>
-
-        </DrawerContent>
-      </Drawer>
-    </>
+        <Drawer
+          isOpen={isOpen}
+          placement="left"
+          onClose={onClose}
+          finalFocusRef={btnRef}
+        >
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <br />
+            <DrawerBody>
+              <Sidebar />
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      </>
       <div className="relative ml-auto lg:ml-0 cursor-pointer w-5 ">
         <IoMdNotificationsOutline
           size={24}
@@ -131,7 +128,10 @@ const Navbar = () => {
             <Link to="#" className="block px-4 py-2 text-gray-800">
               Profile
             </Link>
-            <Link to="/settings" className="flex px-4 py-2 text-gray-800 hover:bg-blue-gray-50">
+            <Link
+              to="/settings"
+              className="flex px-4 py-2 text-gray-800 hover:bg-blue-gray-50"
+            >
               <RiSettings2Line
                 size={24}
                 className=" text-lg mr-2 text-gray-800"

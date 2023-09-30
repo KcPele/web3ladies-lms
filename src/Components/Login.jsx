@@ -6,7 +6,7 @@ import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Google from "../Assests/Google.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCreate from "../hooks/useCreate";
 import { useAppStateContent } from "../context/AppStateContext";
 
@@ -16,10 +16,11 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
-  const { handleToken } = useAppStateContent();
+  const { handleToken, setToken, userTokenDecodar } = useAppStateContent();
 
   const {
     mutate: getUserToken,
@@ -32,6 +33,9 @@ const Login = () => {
   });
   function handleCallBack() {
     console.log("token fetched");
+    if (data) {
+      userTokenDecodar(data.token);
+    }
   }
   const formik = useFormik({
     initialValues: {
@@ -50,7 +54,10 @@ const Login = () => {
 
   useEffect(() => {
     if (data) {
+      userTokenDecodar(data.token);
+      setToken(data.token);
       handleToken(data.token);
+      localStorage.setItem("tokenUser", JSON.stringify(data.token));
     }
   }, [data, isLoading, handleToken]);
 

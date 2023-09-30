@@ -14,9 +14,9 @@ const AppStateContext = ({ children }) => {
   useEffect(() => {
     try {
       const oldToken = localStorage.getItem("tokenUser");
-      if (oldToken) {
+      if (oldToken || token) {
         setToken(JSON.parse(oldToken));
-        userTokenDecodar(JSON.parse(oldToken));
+        userTokenDecodar(token || JSON.parse(oldToken));
         axios.defaults.headers.common["Authorization"] = `Bearer ${
           token ? token : JSON.parse(oldToken)
         }`;
@@ -25,6 +25,7 @@ const AppStateContext = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
+      navigate("/login");
     }
   }, []);
 
@@ -34,23 +35,27 @@ const AppStateContext = ({ children }) => {
   };
 
   const userTokenDecodar = (userToken) => {
-    const decodedToken = jwt_decode(userToken);
-    //check if token is expired
-    if (decodedToken.exp * 1000 < Date.now()) {
-      console.log("token is expired");
-      navigate("/login");
-      localStorage.removeItem("tokenUser");
-      setToken(null);
-    } else {
-      setUserData(decodedToken);
+    try {
+      const decodedToken = jwt_decode(userToken);
+      //check if token is expired
+      if (decodedToken.exp * 1000 < Date.now()) {
+        console.log("token is expired");
+        navigate("/login");
+        localStorage.removeItem("tokenUser");
+        setToken(null);
+      } else {
+        setUserData(decodedToken);
 
-      navigate("/dashboard");
+        navigate("/dashboard");
 
-      if (decodedToken.profile === "teammember") {
-        setIsAdmin(true);
-      } else if (decodedToken.profile === "mentor") {
-        setIsMentor(true);
+        if (decodedToken.profile === "teammember") {
+          setIsAdmin(true);
+        } else if (decodedToken.profile === "mentor") {
+          setIsMentor(true);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -66,6 +71,8 @@ const AppStateContext = ({ children }) => {
         token,
         handleToken,
         userData,
+        setToken,
+        userTokenDecodar,
       }}
     >
       {children}
