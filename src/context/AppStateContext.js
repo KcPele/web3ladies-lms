@@ -12,11 +12,19 @@ const AppStateContext = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    const oldToken = localStorage.getItem("tokenUser");
-    if (oldToken) {
-      setToken(JSON.parse(oldToken));
-    } else {
-      navigate("/login");
+    try {
+      const oldToken = localStorage.getItem("tokenUser");
+      if (oldToken) {
+        setToken(JSON.parse(oldToken));
+        userTokenDecodar(JSON.parse(oldToken));
+        axios.defaults.headers.common["Authorization"] = `Bearer ${
+          token ? token : JSON.parse(oldToken)
+        }`;
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
@@ -46,12 +54,6 @@ const AppStateContext = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    userTokenDecodar(JSON.parse(localStorage.getItem("tokenUser")));
-    axios.defaults.headers.common["Authorization"] = `Bearer ${
-      token ? token : JSON.parse(localStorage.getItem("tokenUser"))
-    }`;
-  }, []);
   return (
     <AppContext.Provider
       value={{
