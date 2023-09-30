@@ -107,15 +107,19 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`${appUrl}/tracks`)
+      .get(`${appUrl}/tracks`, {
+        Authorization: `Bearer ${
+          token || JSON.parse(localStorage.getItem("tokenUser"))
+        }`,
+      })
       .then((res) => {
-        console.log(res);
         setTracksData(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   }, [token]);
+
   return (
     <div className="w-full ">
       {!isNav ? (

@@ -13,11 +13,8 @@ import ModalWrapper from "../../Common/Modal/ModalWrapper";
 import { CancelBtn } from "../../assets";
 import CreateCohort from "./CreateCohort";
 
-
 const Card = ({ modulesData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
- 
 
   return (
     <>
@@ -27,48 +24,48 @@ const Card = ({ modulesData }) => {
             key={item.id}
             className="relative rounded-2xl shadow-lg overflow-hidden w-full mobile:w-[302px] p-4 bg-white"
           >
-               <Link to={`/cohort-bootcamp/${item.id}`} className="">
-            <div className="relative ">
-              <p className="bg-[#F9F9F9] text-[#EEEEEE] text-[120px] text-center font-extrabold  ">
-                {item.id}
-              </p>
-            </div>
-            <div className="">
-              <p className="text-black font-semibold text-xl mt-2">
-                {item.title}
-              </p>
-            </div>
-            <div className="flex justify-between">
-              <div className="flex gap-2 text-[#858585] text-[14px]">
-                <p className="my-auto">{item.theme}</p>
+            <Link to={`/cohort-bootcamp/${item.id}`} className="">
+              <div className="relative ">
+                <p className="bg-[#F9F9F9] text-[#EEEEEE] text-[120px] text-center font-extrabold  ">
+                  1
+                </p>
               </div>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  bg="transparent"
-                  _hover={{ bg: "transparent" }}
-                >
-                  <BsThreeDotsVertical className="cursor-pointer text-[grey]" />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem
-                    onClick={() => alert("Kagebunshin")}
-                    fontWeight="semi-bold"
-                    _hover={{ color: "red" }}
+              <div className="">
+                <p className="text-black font-semibold text-xl mt-2">
+                  {item?.name}
+                </p>
+              </div>
+              <div className="flex justify-between">
+                <div className="flex gap-2 text-[#858585] text-[14px]">
+                  <p className="my-auto">{item?.theme}</p>
+                </div>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    bg="transparent"
+                    _hover={{ bg: "transparent" }}
                   >
-                    Edit
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => alert("Kagebunshin")}
-                    fontWeight="semi-bold"
-                    _hover={{ color: "red" }}
-                  >
-                    Edit Cohort
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </div>
-          </Link>
+                    <BsThreeDotsVertical className="cursor-pointer text-[grey]" />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem
+                      onClick={() => alert("Kagebunshin")}
+                      fontWeight="semi-bold"
+                      _hover={{ color: "red" }}
+                    >
+                      Edit
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => alert("Kagebunshin")}
+                      fontWeight="semi-bold"
+                      _hover={{ color: "red" }}
+                    >
+                      Edit Cohort
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
+            </Link>
           </div>
         ))}
         <div
@@ -93,9 +90,8 @@ const Card = ({ modulesData }) => {
             alt="cancle"
           />
           <p className="font-bold text-[20px] mb-4">Create Cohort</p>
-         
+
           <CreateCohort onClose={onClose} />
-         
         </ModalWrapper>
       </div>
     </>

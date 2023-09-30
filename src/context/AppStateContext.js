@@ -39,7 +39,6 @@ const AppStateContext = ({ children }) => {
       navigate("/dashboard");
 
       if (decodedToken.profile === "teammember") {
-        console.log(decodedToken);
         setIsAdmin(true);
       } else if (decodedToken.profile === "mentor") {
         setIsMentor(true);
@@ -48,11 +47,11 @@ const AppStateContext = ({ children }) => {
   };
 
   useEffect(() => {
-    if (token) {
-      userTokenDecodar(token);
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-  }, [token]);
+    userTokenDecodar(JSON.parse(localStorage.getItem("tokenUser")));
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      token ? token : JSON.parse(localStorage.getItem("tokenUser"))
+    }`;
+  }, []);
   return (
     <AppContext.Provider
       value={{
